@@ -1,0 +1,56 @@
+#include <iostream>
+#include<set>
+using namespace std;
+int n,m,a[100],c[100];
+set<int> b;
+int linear(int num)
+{
+    int flag=0;
+    for(int i=0;i<m;i++)
+    {
+        if (c[i]==num)
+        {
+            flag = 1;
+            break;
+        }
+    }
+    return flag;
+}
+int main()
+{
+    cin>>n;
+    for(int i=0;i<n;i++)
+    {
+        cin>>a[i];
+    }
+    cin>>m;
+    for(int i=0;i<m;i++)
+    {
+        cin>>c[i];
+    }
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            if(c[j]-a[i]>0 && c[j]-a[i]<=100)
+                {
+                    b.insert(c[j]-a[i]);
+                }
+        }
+    }
+    int rs,counter;
+    for(set<int>::iterator it=b.begin();it!=b.end();++it)
+    {
+        counter=0;
+        for(int i=0;i<n;i++)
+        {
+            rs = linear(a[i]+*it);
+            if (rs==1)
+                counter++;
+        }
+        if (counter==n)
+            cout<<*it<<" ";
+    }
+    cout<<endl;
+    return 0;
+}
